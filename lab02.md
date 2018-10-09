@@ -5,7 +5,7 @@
 首先启动Construct 2，依次单击File -> New。
 
 
-![](images\QQ截图20181009163654.png ) 
+![](images\QQ截图20181009163654.png) 
 
 你将看到"*Template or Example*"对话框，单击底部的Open即可创建一个空白项目。
 ![](images\QQ截图20181009154624.png)
@@ -114,3 +114,45 @@
 根据需要将四个对象重命名为Player，Monster，Bullet和Explosion。您可以通过选择对象，然后更改属性栏中的Name属性来执行此操作：
 
 ![](images\QQ截图20181009193507.png)
+
+## 添加行为
+
+### 如何添加行为
+
+先单击需要添加行为的对象，单击*Player*，属性栏中，如下所示选择：
+
+![](images\QQ截图20181009200609.png)
+
+点击添加按钮，再双击"*8 Direction*"以添加行为(*8 Direction*使玩家可以通过方向键来控制*Player*的移动)：
+
+![](images\QQ截图20181009200637.png)
+
+执行同样操作，再将"*Scroll To*"和"*Bound To Layout*"添加到*Player*的行为中，最终如下所示(*Scroll To*使*Player*移动时屏幕跟随移动，*Bound To Layout*使*Player*活动区域局限在图层内，不在区域外游荡)：
+
+![](images\QQ截图20181009200726.png)
+
+此时，你可单击下图所示的*Run Layout*，尝试体验一下吧!
+
+![](images\QQ截图20181009200755.png)
+
+### 添加其他行为
+
+学习如何添加行为后，我们为其他几个游戏对象也添加行为：
+
+1.将*Movements*下的*Bullet*和*General*下的*Destroy Outside Layout*添加到Bullet对象。(*Destroy Outside Layout*对我们的子弹很有用。没有它，子弹将永远飞离屏幕，总是占用一点内存和处理能力。相反，我们应该在他们离开布局后销毁子弹。)
+2.将*Movements*下的*Bullet*添加到Monster对象。
+3.将*General*下的*Fade*添加到*Explosion*对象（因此它出现后会逐渐消失）。默认情况下，*Fade*行为也会在淡出后破坏对象本身，这也使我们不必担心隐藏的爆炸对象会堵塞游戏。
+
+如果你运行游戏，你可能会注意到唯一不同的是，你可以看到怪物突然快速移动。让我们将它放慢一下。选择*Monster*对象。请注意，自从我们添加了一个行为后，属性栏中出现了一些额外的属性：
+
+![](images\QQ截图20181009230925.png)
+
+我们将*Monster*的*Speed*改为80；*Bullet*的*Speed*改为600,将*Explosion*的淡出时间改为0.5秒。
+
+### 创造一些更多的怪物
+
+当我们同时按住Ctrl键并拖拉游戏对象时，可快速生成另一个同样的对象。效果如下所示:
+
+![](images\2.gif)
+
+## 活动
