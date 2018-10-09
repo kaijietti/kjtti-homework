@@ -90,6 +90,8 @@
 ![](https://www.scirra.com/images/articles/explode.png)
 
 现在我们将上述游戏对象插入:
+
+
 1.双击布局；
 
 
