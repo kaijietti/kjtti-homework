@@ -1,6 +1,6 @@
 # Never Touch游戏设计
 
-该视频为成果图：
+该视频为成果图：(动图有点大，麻烦稍加等待，谢谢！)
 
 ![](images\Never Touch.gif)
 
