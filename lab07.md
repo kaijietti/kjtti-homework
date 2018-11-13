@@ -1,3 +1,5 @@
+# pdf版本在[实验报告](机器指令编程——实验报告.pdf)请进入链接中查看
+
 # 任务 1：简单程序
 
 ### （1）打开网页 The PIPPIN User’s Guide ，然后输入 Program 1：Add 2 number
