@@ -85,8 +85,8 @@ int main() {
 }
 
 void print_map_playgame() {
-	
-	for(int i=0;i<12;i++) {
+	int i;
+	for(i=0;i<12;i++) {
         printf("%s\n",map_playgame[i]);
     }
     
