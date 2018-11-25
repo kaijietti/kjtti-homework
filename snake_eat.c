@@ -85,9 +85,11 @@ int main() {
 }
 
 void print_map_playgame() {
+	
 	for(int i=0;i<12;i++) {
         printf("%s\n",map_playgame[i]);
     }
+    
 } 
 void put_food(){    //  随机投放食物 
 
@@ -133,6 +135,7 @@ void snake_move(int dx,int dy) {//蛇移动
 	} 
 } 
 void restart() {//重置游戏 
+
 	memcpy(map_playgame,map_restart,sizeof(map_restart));
 	
     memcpy(snake_nextx_playgame,snake_nextx_restart,sizeof(snake_nextx_restart));
@@ -179,5 +182,6 @@ void playgame() {//进行游戏
 		}
 	}
 	system("cls");//跳出上述循环时，游戏结束，清屏 
+	
 }
 /*	*/

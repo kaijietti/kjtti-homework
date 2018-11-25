@@ -83,12 +83,15 @@ int main() {
 }
 
 void print_map_playgame() {
+	
 	for(int i=0;i<12;i++) {
         printf("%s\n",map_playgame[i]);
     }
+    
 } 
 
 void snake_move(int dx,int dy) {//蛇移动 
+
     int x,y; 
 	Sleep(100);
 	map_playgame[tailx][taily] = BLANK_CELL;//尾部变成空格
@@ -111,6 +114,7 @@ void snake_move(int dx,int dy) {//蛇移动
 
 } 
 void restart() {//重置游戏 
+
 	memcpy(map_playgame,map_restart,sizeof(map_restart));
 	
     memcpy(snake_nextx_playgame,snake_nextx_restart,sizeof(snake_nextx_restart));
@@ -123,7 +127,8 @@ void restart() {//重置游戏
 	printf("Do you want to start?\ny for yes;n for no\n");
 	scanf("%c",&if_start_game);
 	getchar(); //将上一次scanf输入后的回车清除 
-	if(if_start_game != 'y') exit(1); //除了'y',其余键退出 
+	if(if_start_game != 'y') exit(1); //除了'y',其余键退出
+	 
 }
 void playgame() {//进行游戏
 
@@ -156,5 +161,6 @@ void playgame() {//进行游戏
 		} 
 	}
 	system("cls");//跳出上述循环时，游戏结束，清屏 
+	
 }
 /*	*/
