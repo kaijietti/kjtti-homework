@@ -108,17 +108,99 @@ VT100 的颜色输出分为,前景色和背景色可以分别输出,如果不需
 
 ## 智能蛇设计
 
-效果如下：
-![](images\智能蛇.gif)
+效果如下：（智能的时候）
+
+![](images\智能蛇1.gif)
+
+（智障的“瞬间”）
+
+![](images\智障蛇.gif)
 
 代码：[智能蛇](snake_smart.c)
 
 **思路？**
 
-首先，先不考虑距离，判断w、a、s、d四方向的可行性，设一数组possible_move[4] = {1,1,1,1} （注意，数组元素依次对应 w、a、s、d，比如，第一个元素下标是0，对应w方向的可行性），若不可行，将不可行方向的对应的下标导引的元素值从0变为1；
+**首先**，先不考虑距离，判断w、a、s、d四方向的**可行性**，设一数组possible_move[4] = {1,1,1,1} （注意，数组元素依次对应 w、a、s、d，比如，第一个元素下标是0，对应w方向的可行性），若不可行，将不可行方向的对应的下标导引的元素值从0变为1；
 
-第二步，经过上一轮的筛选，再考虑距离，在put_food()函数里改变food[2]数组的值，下标0导引的元素值对应食物x坐标，下标1导引的元素值对应食物y坐标。创建cur_distance[4]数组，如下所示赋值：
+**第二步**，经过上一轮的筛选，再**考虑距离**，在put_food()函数里改变food[2]数组的值，下标0导引的元素值对应食物x坐标，下标1导引的元素值对应食物y坐标。创建cur_distance[4]数组，如下所示赋值：
 
-![](images\QQ截图20181210195407.png)
+```c 
+int cur_distance[4];
+		
+cur_distance[0] = abs(headx - 1 - food[0]) + abs(heady - food[1]);//w
 
-第三步，
+cur_distance[1] = abs(headx - food[0]) + abs(heady - 1 - food[1]);//a
+
+cur_distance[2] = abs(headx + 1 - food[0]) + abs(heady - food[1]);//s
+
+cur_distance[3] = abs(headx - food[0]) + abs(heady + 1 - food[1]);//d
+
+```
+
+**第三步**，在可行的方向中选择最小距离的那个方向作为下一次移动的方向。
+
+以下就是具体的如何选择移动方向的函数设计
+
+```c
+int possible_move[4] = {1,1,1,1};
+
+printf("\033[2J");//清屏 
+int xx[4] = {-1,0,1,0};
+int yy[4] = {0,-1,0,1};
+for(int i = 0;i < 4;i ++) {
+	if(map_playgame[headx+xx[i]][heady+yy[i]] == WALL_CELL || map_playgame[headx+xx[i]][heady+yy[i]] == SNAKE_BODY)
+	possible_move[i] = 0;
+}
+		
+int cur_distance[4];
+		
+cur_distance[0] = abs(headx - 1 - food[0]) + abs(heady - food[1]);//w
+cur_distance[1] = abs(headx - food[0]) + abs(heady - 1 - food[1]);//a
+cur_distance[2] = abs(headx + 1 - food[0]) + abs(heady - food[1]);//s
+cur_distance[3] = abs(headx - food[0]) + abs(heady + 1 - food[1]);//d
+		
+char next_direction;
+
+int k;
+for(k = 0;k < 4;k ++) {
+	if(possible_move[k] == 1) 
+        break;//随机选取一个可行方向
+	}
+
+int min = cur_distance[k];
+int min_pos = k;
+for(int i = 0;i < 4;i ++) {
+	if( possible_move[i] == 1 && cur_distance[i] < min) 
+		{
+			min = cur_distance[i];
+			min_pos = i;
+		}
+}
+		
+switch(min_pos) {
+			
+	case 0: next_direction = 'w';break;
+	case 1: next_direction = 'a';break;
+	case 2: next_direction = 's';break;
+	case 3: next_direction = 'd';break;
+			
+}
+		
+direction = next_direction;
+		
+switch(direction) {
+			
+	case 'w': snake_move(-1,0,food);break;
+	case 'a': snake_move(0,-1,food);break;
+	case 's': snake_move(1,0,food);break;
+	case 'd': snake_move(0,1,food);break;
+			
+}
+print_map_playgame();//打印进行一次snake_move后的地图 
+```
+
+---
+
+## 实验总结
+
+经过

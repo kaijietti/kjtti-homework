@@ -20,13 +20,13 @@
 
 char if_start_game = 'y';//用于判断是否是用户意愿停止游戏 
 int if_end_game = 0;//用于判断是否是撞墙或者自食而停止游戏 
-
+int food[2] = {0,0};
 char map_restart[12][13] = {//初始状态地图 
 	"************",      //可用于重置游戏
 	"*XXXXH *   *",
 	"*      *   *",
-	"*  **      *",
-	"*     **** *",
+	"*  ***     *",
+	"*     * *  *",
 	"*          *",
 	"*          *",
 	"*          *",
@@ -100,11 +100,12 @@ void put_food(int *food){    //  随机投放食物
         x=rand() % 12; y=rand() % 12;    //  随机一个坐标 
         if (map_playgame[x][y]==BLANK_CELL) {    //  若此坐标为空白格 
             map_playgame[x][y] = SNAKE_FOOD ;   //  改为食物 
+            food[0] = x;
+    		food[1] = y;
             return;     //  跳出 
         }  
     }
-    food[0] = x;
-    food[1] = y;
+    
 }
 void snake_move(int dx,int dy,int *food) {//蛇移动 
     
@@ -114,7 +115,7 @@ void snake_move(int dx,int dy,int *food) {//蛇移动
 		is_eat = 1;//如果吃到食物则更新bool 
 	}
 	if(!is_eat) {//如果没吃到食物，尾巴将往下一节移动 
-		usleep(1000000);
+		usleep(400000);
 		map_playgame[tailx][taily] = BLANK_CELL;//尾部变成空格
 		x = snake_nextx_playgame[tailx][taily];
 		y = snake_nexty_playgame[tailx][taily];//获取新蛇尾的坐标 
@@ -154,10 +155,13 @@ void restart() {//重置游戏
 	if(if_start_game != 'y') exit(1); //除了'y',其余键退出 
 }
 void playgame() {//进行游戏
-	static int food[2] = {0,0};
+
 	printf("\033[2J");//清屏 
 	put_food(food);//投放食物 
+	printf("x = %d y = %d\n",food[0],food[1]);
+
 	print_map_playgame();//打印初始地图 
+	system("pause");
 	char direction = 'd';//初始方向为'd',即朝向右
 	while(!if_end_game) {
 		int possible_move[4] = {1,1,1,1};
@@ -177,38 +181,30 @@ void playgame() {//进行游戏
 		cur_distance[3] = abs(headx - food[0]) + abs(heady + 1 - food[1]);//d
 		
 		char next_direction;
-		
-		int min = cur_distance[0];
-		int min_pos = 0;
-		for(int i = 1;i < 4;i ++) {
-			if(cur_distance[i] < min ) 
+		int k;
+		for(k = 0;k < 4;k ++) {
+			if(possible_move[k] == 1) break;
+		}
+		int min = cur_distance[k];
+		int min_pos = k;
+		for(int i = 0;i < 4;i ++) {
+			if( possible_move[i] == 1 && cur_distance[i] < min) 
 			{
 				min = cur_distance[i];
 				min_pos = i;
 			}
 		}
 		
-		if(possible_move[min_pos] == 1) {
-			switch(min_pos) {
-				case 0: next_direction = 'w';break;
-				case 1: next_direction = 'a';break;
-				case 2: next_direction = 's';break;
-				case 3: next_direction = 'd';break;
-			}
+		
+		switch(min_pos) {
+			
+			case 0: next_direction = 'w';break;
+			case 1: next_direction = 'a';break;
+			case 2: next_direction = 's';break;
+			case 3: next_direction = 'd';break;
+			
 		}
-		else {
-			int i;
-			for(i = 4;i >= 0;i --) {
-				if(possible_move[i] == 1)
-				break;
-			}
-			switch(i) {
-				case 0: next_direction = 'w';break;
-				case 1: next_direction = 'a';break;
-				case 2: next_direction = 's';break;
-				case 3: next_direction = 'd';break;
-			}
-		}
+		
 		
 		direction = next_direction;
 		
