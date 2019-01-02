@@ -73,7 +73,7 @@
 　　即时通讯营销是互联网营销最普遍的一种形式之一，常见的即时通讯工具有QQ、微信等，企业用户通过即时工具于用户及时互动，此外还可以发布一些企业信息和产品信息，让更多消费者认识和了解。
 
 <center>
-<img src=https://upload-images.jianshu.io/upload_images/2702646-9345b2e50209bd68.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/609/format/webp" width="55%" />
+<img src="https://upload-images.jianshu.io/upload_images/2702646-9345b2e50209bd68.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/609/format/webp" width="55%" />
 </center>
 
 第三种形式：病毒式营销
